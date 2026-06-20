@@ -1,0 +1,21 @@
+# Data (giữ sample, ignore file lớn tải về sau)
+data/raw/*
+!data/raw/.gitkeep
+!data/raw/sample.jsonl
+
+data/processed/*
+!data/processed/.gitkeep
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+.env
+
+# ML artifacts (Part 6+)
+mlruns/
+models/
+
+# OS
+.DS_Store

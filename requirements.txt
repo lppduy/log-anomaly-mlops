@@ -1,0 +1,4 @@
+pyyaml>=6.0
+pandas>=2.0
+drain3>=0.9.11
+requests>=2.31

@@ -1,0 +1,11 @@
+{"timestamp": "2026-06-20T10:00:01Z", "level": "INFO", "service": "api", "message": "GET /health 200", "trace_id": "t-001"}
+{"timestamp": "2026-06-20T10:00:02Z", "level": "INFO", "service": "api", "message": "GET /users 200", "trace_id": "t-002"}
+{"timestamp": "2026-06-20T10:00:03Z", "level": "INFO", "service": "api", "message": "POST /orders 201", "trace_id": "t-003"}
+{"timestamp": "2026-06-20T10:00:04Z", "level": "ERROR", "service": "api", "message": "Slow query took 850ms", "trace_id": "t-004"}
+{"timestamp": "2026-06-20T10:00:05Z", "level": "ERROR", "service": "db", "message": "Connection refused to postgres:5432", "trace_id": "t-005"}
+{"timestamp": "2026-06-20T10:00:06Z", "level": "ERROR", "service": "db", "message": "Connection refused to redis:6379", "trace_id": "t-006"}
+{"timestamp": "2026-06-20T10:00:07Z", "level": "ERROR", "service": "db", "message": "Connection refused to mysql:3306", "trace_id": "t-007"}
+{"timestamp": "2026-06-20T10:00:08Z", "level": "ERROR", "service": "payment", "message": "Charge failed for user_id=8821", "trace_id": "t-008"}
+{"timestamp": "2026-06-20T10:00:09Z", "level": "INFO", "service": "api", "message": "GET /health 200", "trace_id": "t-009"}
+{"timestamp": "2026-06-20T10:00:10Z", "level": "ERROR", "service": "auth", "message": "Invalid token for user_id=9912", "trace_id": "t-010"}
+{"timestamp": "2026-06-20T10:00:11Z", "level": "ERROR", "service": "auth", "message": "Invalid token for user_id=8821", "trace_id": "t-011"}

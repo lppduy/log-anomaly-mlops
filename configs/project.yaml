@@ -1,0 +1,49 @@
+project:
+  name: log-anomaly-mlops
+  version: 0.3.0
+
+problem:
+  type: anomaly_detection
+  unit: log_line
+  target_metric: precision_at_k
+  k: 100
+  anomaly_threshold: 0.5
+
+data:
+  source: sample
+  raw_dir: data/raw
+  processed_dir: data/processed
+  sample_file: data/raw/sample.jsonl
+  hdfs_file: data/raw/HDFS_2k.log_structured.csv
+  hdfs_url: https://raw.githubusercontent.com/logpai/loghub/master/HDFS/HDFS_2k.log_structured.csv
+  parsed_sample_file: data/processed/parsed_sample.jsonl
+  parsed_hdfs_file: data/processed/parsed_hdfs.jsonl
+  sample_size: 50000
+
+schema:
+  required_fields:
+    - timestamp
+    - level
+    - message
+  optional_fields:
+    - service
+    - trace_id
+  parsed_fields:
+    - template
+    - event_id
+
+parser:
+  engine: drain3
+  sim_threshold: 0.4
+  depth: 4
+  max_children: 100
+
+baseline:
+  error_score: 0.8
+  normal_score: 0.1
+
+baseline_v2:
+  rare_count_threshold: 2
+  rare_score: 0.85
+  error_score: 0.65
+  normal_score: 0.1
