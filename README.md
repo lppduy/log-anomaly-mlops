@@ -66,10 +66,24 @@ python scripts/explore_part3.py
 python scripts/run_baseline_v2.py
 ```
 
-Chi tiết học:
-- [LEARNING.md](./LEARNING.md) (Part 1)
-- [LEARNING-part2.md](./LEARNING-part2.md) (Part 2)
-- [LEARNING-part3.md](./LEARNING-part3.md) (Part 3)
+## Quick start (Part 4)
+
+```bash
+python scripts/run_features_part4.py
+python scripts/explore_part4.py
+```
+
+## Quick start (Part 5)
+
+```bash
+python scripts/run_train_part5.py
+python scripts/explore_part5.py
+```
+
+Chi tiết học: [docs/](./docs/)
+
+- [Part 1](./docs/LEARNING.md) | [Part 2](./docs/LEARNING-part2.md) | [Part 3](./docs/LEARNING-part3.md) | [Part 4](./docs/LEARNING-part4.md) | [Part 5](./docs/LEARNING-part5.md)
+- [Giải thích sâu Isolation Forest](./docs/isolation-forest-deep-dive.md)
 
 ## Roadmap
 
@@ -78,8 +92,8 @@ Chi tiết học:
 | 1 | Framing + baseline | Done |
 | 2 | Ingest + normalize + template | Done |
 | 3 | EDA template + baseline v2 | Done |
-| 4 | Feature engineering | Todo |
-| 5 | Train model | Todo |
+| 4 | Feature engineering | Done |
+| 5 | Train model | Done |
 | 6 | MLflow | Todo |
 | 7 | FastAPI serving | Todo |
 | 8 | CI/CD + monitoring | Todo |

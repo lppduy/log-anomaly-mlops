@@ -6,6 +6,9 @@ data/raw/*
 data/processed/*
 !data/processed/.gitkeep
 
+/models/*
+!/models/.gitkeep
+
 # Python
 __pycache__/
 *.pyc
@@ -15,7 +18,6 @@ venv/
 
 # ML artifacts (Part 6+)
 mlruns/
-models/
 
 # OS
 .DS_Store

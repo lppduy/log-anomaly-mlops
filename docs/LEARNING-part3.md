@@ -86,5 +86,5 @@ else:                     score = 0.10  # normal
 
 ## Part 4 (tiếp theo)
 
-- Feature engineering: TF-IDF template, level encoding, service counts
+Xem [LEARNING-part4.md](./LEARNING-part4.md)
 - Chuẩn bị matrix X cho sklearn
