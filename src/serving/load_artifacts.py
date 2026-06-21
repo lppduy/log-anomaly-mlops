@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import shutil
 import tempfile
 from dataclasses import dataclass
 from pathlib import Path
@@ -73,20 +74,31 @@ def _load_template_parser_from_mlflow(
 ) -> TemplateParser:
     parser_cfg = config["parser"]
     state_name = Path(parser_cfg["state_file"]).name
+    serving_state = root / "models" / "drain3_serving.bin"
+    serving_state.parent.mkdir(parents=True, exist_ok=True)
+
     with tempfile.TemporaryDirectory() as tmp:
         artifact_dir = Path(client.download_artifacts(run_id, "template_parser", dst_path=tmp))
         state_path = artifact_dir / state_name
         if not state_path.exists():
             local_state = root / parser_cfg["state_file"]
             if local_state.exists():
-                return _load_template_parser(config, root)
+                shutil.copy2(local_state, serving_state)
+                return TemplateParser.from_state_file(
+                    serving_state,
+                    sim_threshold=parser_cfg["sim_threshold"],
+                    depth=parser_cfg["depth"],
+                    max_children=parser_cfg["max_children"],
+                )
             raise FileNotFoundError(f"Missing template_parser artifact in run {run_id}")
-        return TemplateParser.from_state_file(
-            state_path,
-            sim_threshold=parser_cfg["sim_threshold"],
-            depth=parser_cfg["depth"],
-            max_children=parser_cfg["max_children"],
-        )
+        shutil.copy2(state_path, serving_state)
+
+    return TemplateParser.from_state_file(
+        serving_state,
+        sim_threshold=parser_cfg["sim_threshold"],
+        depth=parser_cfg["depth"],
+        max_children=parser_cfg["max_children"],
+    )
 
 
 def load_from_mlflow(config: dict[str, Any], root: Path) -> ServingBundle:

@@ -9,4 +9,5 @@
 | [LEARNING-part5.md](./LEARNING-part5.md) | Part 5: train Isolation Forest |
 | [LEARNING-part6.md](./LEARNING-part6.md) | Part 6: MLflow tracking + registry |
 | [LEARNING-part7.md](./LEARNING-part7.md) | Part 7: FastAPI serving |
+| [LEARNING-part8.md](./LEARNING-part8.md) | Part 8: CI/CD + monitoring |
 | [isolation-forest-deep-dive.md](./isolation-forest-deep-dive.md) | Giải thích sâu IF, contamination, precision@K, model lưu gì |

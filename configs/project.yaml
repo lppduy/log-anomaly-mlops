@@ -1,6 +1,6 @@
 project:
   name: log-anomaly-mlops
-  version: 0.7.0
+  version: 0.8.0
 
 problem:
   type: anomaly_detection
@@ -80,3 +80,7 @@ serving:
   port: 8000
   source: mlflow
   model_stage: Staging
+
+monitoring:
+  max_flag_rate_delta: 0.15
+  max_avg_latency_ms: 100

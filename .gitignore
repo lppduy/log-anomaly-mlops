@@ -8,6 +8,7 @@ data/processed/*
 
 /models/*
 !/models/.gitkeep
+models/drain3_serving.bin
 
 # Python
 __pycache__/

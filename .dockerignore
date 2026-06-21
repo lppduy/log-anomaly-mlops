@@ -1,0 +1,13 @@
+.venv
+.venv-ui
+__pycache__
+*.pyc
+.git
+mlruns
+data/raw/*
+!data/raw/sample.jsonl
+data/processed
+models/*
+!models/.gitkeep
+.DS_Store
+scripts/test_api_part7_output.txt

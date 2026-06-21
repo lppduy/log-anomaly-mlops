@@ -100,9 +100,18 @@ python scripts/run_api_part7.py
 bash scripts/test_api_part7.sh
 ```
 
+## Quick start (Part 8)
+
+```bash
+python scripts/explore_part8.py
+
+# Docker (cần mlruns + models local)
+docker compose up --build
+```
+
 Chi tiết học: [docs/](./docs/)
 
-- [Part 1](./docs/LEARNING.md) | [Part 2](./docs/LEARNING-part2.md) | [Part 3](./docs/LEARNING-part3.md) | [Part 4](./docs/LEARNING-part4.md) | [Part 5](./docs/LEARNING-part5.md) | [Part 6](./docs/LEARNING-part6.md) | [Part 7](./docs/LEARNING-part7.md)
+- [Part 1](./docs/LEARNING.md) | [Part 2](./docs/LEARNING-part2.md) | [Part 3](./docs/LEARNING-part3.md) | [Part 4](./docs/LEARNING-part4.md) | [Part 5](./docs/LEARNING-part5.md) | [Part 6](./docs/LEARNING-part6.md) | [Part 7](./docs/LEARNING-part7.md) | [Part 8](./docs/LEARNING-part8.md)
 - [Giải thích sâu Isolation Forest](./docs/isolation-forest-deep-dive.md)
 
 ## Roadmap
@@ -116,4 +125,4 @@ Chi tiết học: [docs/](./docs/)
 | 5 | Train model | Done |
 | 6 | MLflow | Done |
 | 7 | FastAPI serving | Done |
-| 8 | CI/CD + monitoring | Todo |
+| 8 | CI/CD + monitoring | Done |

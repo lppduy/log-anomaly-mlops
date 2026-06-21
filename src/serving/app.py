@@ -2,10 +2,13 @@
 
 from __future__ import annotations
 
+import time
 from pathlib import Path
+
 from fastapi import FastAPI, HTTPException
 
 from src.config import load_config
+from src.monitoring.metrics import metrics_store
 from src.serving.load_artifacts import ServingBundle, load_serving_bundle
 from src.serving.predictor import AnomalyPredictor
 from src.serving.schemas import HealthResponse, LogLineRequest, ModelInfoResponse, PredictResponse
@@ -14,8 +17,8 @@ ROOT = Path(__file__).resolve().parents[2]
 
 app = FastAPI(
     title="Log Anomaly API",
-    version="0.7.0",
-    description="Serve Isolation Forest model từ MLflow registry (Part 7).",
+    version="0.8.0",
+    description="Serve Isolation Forest model từ MLflow registry (Part 7+8).",
 )
 
 _predictor: AnomalyPredictor | None = None
@@ -65,9 +68,26 @@ def model_info() -> ModelInfoResponse:
     )
 
 
+@app.get("/metrics")
+def metrics() -> dict[str, float | int]:
+    return metrics_store.snapshot()
+
+
 @app.post("/predict", response_model=PredictResponse)
 def predict(payload: LogLineRequest) -> PredictResponse:
+    started = time.perf_counter()
     try:
-        return get_predictor().predict(payload)
+        result = get_predictor().predict(payload)
     except ValueError as exc:
+        metrics_store.record_error()
         raise HTTPException(status_code=400, detail=str(exc)) from exc
+    except HTTPException:
+        metrics_store.record_error()
+        raise
+    except Exception:
+        metrics_store.record_error()
+        raise
+
+    latency_ms = (time.perf_counter() - started) * 1000
+    metrics_store.record_predict(latency_ms=latency_ms, is_anomaly=result.is_anomaly)
+    return result
