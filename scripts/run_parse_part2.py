@@ -77,12 +77,15 @@ def main() -> None:
         sim_threshold=parser_cfg["sim_threshold"],
         depth=parser_cfg["depth"],
         max_children=parser_cfg["max_children"],
+        state_path=ROOT / parser_cfg["state_file"],
     )
     hdfs_parsed = run_pipeline(raw_logs=hdfs_raw, source="hdfs", parser=hdfs_parser)
     hdfs_out = ROOT / config["data"]["parsed_hdfs_file"]
     save_jsonl(hdfs_parsed, hdfs_out)
+    drain3_state = hdfs_parser.save_state()
     print_summary("HDFS CSV", hdfs_parsed)
     print(f"Saved: {hdfs_out}")
+    print(f"Saved Drain3 state: {drain3_state}")
 
     print("\n" + "=" * 60)
     print("Ví dụ message -> template (sample):")

@@ -36,13 +36,44 @@ def raw_scores(model: IsolationForest, X: np.ndarray) -> np.ndarray:
 def to_anomaly_scores(raw: np.ndarray) -> np.ndarray:
     """
     Đổi sang thang 0-1, cao hơn = bất thường hơn (thống nhất với baseline).
+    Dùng min/max của batch hiện tại (phù hợp evaluate test set).
     """
     inverted = -raw
     min_val = float(inverted.min())
     max_val = float(inverted.max())
-    if max_val == min_val:
-        return np.zeros_like(inverted)
-    return (inverted - min_val) / (max_val - min_val)
+    return to_anomaly_scores_with_bounds(inverted, inv_min=min_val, inv_max=max_val)
+
+
+def to_anomaly_scores_with_bounds(
+    inverted: np.ndarray | float,
+    *,
+    inv_min: float,
+    inv_max: float,
+) -> np.ndarray:
+    """Normalize score dùng bounds cố định từ train (dùng khi serve 1 log)."""
+    arr = np.asarray(inverted, dtype=np.float64)
+    if inv_max == inv_min:
+        return np.zeros_like(arr)
+    return (arr - inv_min) / (inv_max - inv_min)
+
+
+def score_single_with_bounds(
+    model: IsolationForest,
+    X: np.ndarray,
+    *,
+    inv_min: float,
+    inv_max: float,
+    threshold: float = 0.5,
+) -> dict[str, Any]:
+    raw = float(raw_scores(model, X)[0])
+    inverted = -raw
+    score_val = to_anomaly_scores_with_bounds(inverted, inv_min=inv_min, inv_max=inv_max)
+    score = float(np.atleast_1d(score_val)[0])
+    return {
+        "raw_score": raw,
+        "anomaly_score": score,
+        "is_anomaly": score >= threshold,
+    }
 
 
 def predict_flags(scores: np.ndarray, threshold: float = 0.5) -> np.ndarray:

@@ -18,6 +18,10 @@ venv/
 
 # ML artifacts (Part 6+)
 mlruns/
+.venv-ui/
+
+# Test output
+scripts/test_api_part7_output.txt
 
 # OS
 .DS_Store

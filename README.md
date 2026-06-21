@@ -80,9 +80,29 @@ python scripts/run_train_part5.py
 python scripts/explore_part5.py
 ```
 
+## Quick start (Part 6)
+
+```bash
+python scripts/run_mlflow_part6.py
+python scripts/explore_part6.py
+
+# UI (terminal khác, Python 3.13)
+mlflow ui --backend-store-uri sqlite:///mlruns/mlflow.db
+```
+
+## Quick start (Part 7)
+
+```bash
+python scripts/explore_part7.py
+python scripts/run_api_part7.py
+
+# Terminal khác (server đang chạy)
+bash scripts/test_api_part7.sh
+```
+
 Chi tiết học: [docs/](./docs/)
 
-- [Part 1](./docs/LEARNING.md) | [Part 2](./docs/LEARNING-part2.md) | [Part 3](./docs/LEARNING-part3.md) | [Part 4](./docs/LEARNING-part4.md) | [Part 5](./docs/LEARNING-part5.md)
+- [Part 1](./docs/LEARNING.md) | [Part 2](./docs/LEARNING-part2.md) | [Part 3](./docs/LEARNING-part3.md) | [Part 4](./docs/LEARNING-part4.md) | [Part 5](./docs/LEARNING-part5.md) | [Part 6](./docs/LEARNING-part6.md) | [Part 7](./docs/LEARNING-part7.md)
 - [Giải thích sâu Isolation Forest](./docs/isolation-forest-deep-dive.md)
 
 ## Roadmap
@@ -94,6 +114,6 @@ Chi tiết học: [docs/](./docs/)
 | 3 | EDA template + baseline v2 | Done |
 | 4 | Feature engineering | Done |
 | 5 | Train model | Done |
-| 6 | MLflow | Todo |
-| 7 | FastAPI serving | Todo |
+| 6 | MLflow | Done |
+| 7 | FastAPI serving | Done |
 | 8 | CI/CD + monitoring | Todo |

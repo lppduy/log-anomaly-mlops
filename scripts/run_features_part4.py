@@ -22,12 +22,15 @@ from src.config import load_config
 from src.features.build_features import LogFeatureBuilder
 from src.features.split import train_test_split_logs
 from src.ingest.load_logs import load_jsonl
+from src.parse.template import fit_parser_state_from_logs
 
 
 def main() -> None:
     config = load_config()
     feat_cfg = config["features"]
+    parser_cfg = config["parser"]
     hdfs_path = ROOT / config["data"]["parsed_hdfs_file"]
+    drain3_state_path = ROOT / parser_cfg["state_file"]
 
     if not hdfs_path.exists():
         print(f"Chưa có {hdfs_path}")
@@ -35,6 +38,16 @@ def main() -> None:
         return
 
     logs = load_jsonl(hdfs_path)
+    if not drain3_state_path.exists():
+        print(f"Building Drain3 state: {drain3_state_path}")
+        fit_parser_state_from_logs(
+            logs,
+            drain3_state_path,
+            sim_threshold=parser_cfg["sim_threshold"],
+            depth=parser_cfg["depth"],
+            max_children=parser_cfg["max_children"],
+        )
+
     train_logs, test_logs, train_idx, test_idx = train_test_split_logs(
         logs,
         test_size=feat_cfg["test_size"],

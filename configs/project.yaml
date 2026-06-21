@@ -1,6 +1,6 @@
 project:
   name: log-anomaly-mlops
-  version: 0.5.0
+  version: 0.7.0
 
 problem:
   type: anomaly_detection
@@ -37,6 +37,7 @@ parser:
   sim_threshold: 0.4
   depth: 4
   max_children: 100
+  state_file: models/drain3_hdfs.bin
 
 baseline:
   error_score: 0.8
@@ -65,3 +66,17 @@ model:
   model_file: models/anomaly_model.joblib
   predictions_file: data/processed/predictions_test.jsonl
   metrics_file: data/processed/train_metrics.json
+
+mlflow:
+  tracking_uri: sqlite:///mlruns/mlflow.db
+  experiment_name: log-anomaly-mlops
+  registered_model_name: log-anomaly-detector
+  run_name: isolation-forest-hdfs
+  promote_to_staging: true
+  prediction_sample_size: 20
+
+serving:
+  host: 127.0.0.1
+  port: 8000
+  source: mlflow
+  model_stage: Staging

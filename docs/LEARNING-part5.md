@@ -85,3 +85,5 @@ Xem [isolation-forest-deep-dive.md](./isolation-forest-deep-dive.md):
 
 - MLflow log params, metrics, model artifact
 - Model registry Staging → Production
+
+Xem [LEARNING-part6.md](./LEARNING-part6.md)
